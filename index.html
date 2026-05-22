@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANT — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0d12;
+    --surface:   #111520;
+    --border:    #1e2535;
+    --sul:       #00b4ff;
+    --sul-dim:   #003d57;
+    --norte:     #ff6b1a;
+    --norte-dim: #4a1f00;
+    --ok:        #00e676;
+    --warn:      #ffd600;
+    --text:      #e8eaf0;
+    --muted:     #5a6170;
+    --radius:    12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 36px;
+    gap: 24px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .logo-ant {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .logo-sub {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .atualizado {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .atualizado span {
+    color: var(--ok);
+    font-weight: 600;
+  }
+
+  /* ── META PRINCIPAL ── */
+  .meta-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .meta-numeros {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .meta-total {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 6rem;
+    line-height: 1;
+    color: var(--text);
+    transition: color 0.5s;
+  }
+
+  .meta-total.atingida { color: var(--ok); }
+
+  .meta-separador {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--muted);
+  }
+
+  .meta-valor {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--muted);
+  }
+
+  .meta-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .meta-barra-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .meta-barra-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .meta-barra-outer {
+    height: 18px;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .meta-barra-inner {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--sul), var(--ok));
+    transition: width 1s cubic-bezier(.4,0,.2,1);
+    position: relative;
+  }
+
+  .meta-barra-inner.atingida {
+    background: linear-gradient(90deg, var(--ok), #69ffa7);
+  }
+
+  .meta-faltam {
+    font-size: 0.85rem;
+    color: var(--warn);
+    font-weight: 600;
+  }
+
+  .meta-faltam.atingida {
+    color: var(--ok);
+  }
+
+  /* ── AGENDAS ── */
+  .agendas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .agenda-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .agenda-card.sul  { border-top: 3px solid var(--sul); }
+  .agenda-card.norte { border-top: 3px solid var(--norte); }
+
+  .agenda-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .agenda-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+  }
+
+  .sul  .agenda-titulo { color: var(--sul); }
+  .norte .agenda-titulo { color: var(--norte); }
+
+  .agenda-total {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    line-height: 1;
+  }
+
+  .sul  .agenda-total { color: var(--sul); }
+  .norte .agenda-total { color: var(--norte); }
+
+  .agenda-total-label {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── GRID DE MESES ── */
+  .meses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
+  }
+
+  .mes-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mes-nome {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .mes-qtd {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .sul  .mes-qtd { color: var(--sul); }
+  .norte .mes-qtd { color: var(--norte); }
+
+  .mes-qtd.zero { color: var(--border); }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  .footer-info {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .reload-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .reload-btn:hover {
+    border-color: var(--sul);
+    color: var(--sul);
+  }
+
+  /* ── LOADING / ERRO ── */
+  .estado {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--sul);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── COUNTDOWN ── */
+  .countdown {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── ANIMAÇÃO ENTRADA ── */
+  .fade-in {
+    animation: fadeIn 0.6s ease both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-ant">ANT</div>
+    <div class="logo-sub">Agenda Nacional de Torneios</div>
+  </div>
+  <div class="header-right">
+    <div class="atualizado">Atualizado às <span id="horario">--:--</span></div>
+    <div class="countdown" id="countdown">próxima atualização em --:--</div>
+  </div>
+</header>
+
+<div id="conteudo"><div class="estado"><div class="spinner"></div><span>Carregando dados...</span></div></div>
+
+<footer>
+  <div class="footer-info">DASHBOARD ANT · atualização automática a cada 10 min</div>
+  <button class="reload-btn" onclick="carregarDados()">↺ ATUALIZAR AGORA</button>
+</footer>
+
+<script>
+const DADOS_URL   = './dados.json';
+const INTERVALO   = 10 * 60 * 1000; // 10 minutos
+let   proximaAtt  = Date.now() + INTERVALO;
+let   dadosAtuais = null;
+
+// ── Countdown ──────────────────────────────────────────────
+setInterval(() => {
+  const restante = Math.max(0, proximaAtt - Date.now());
+  const m = String(Math.floor(restante / 60000)).padStart(2, '0');
+  const s = String(Math.floor((restante % 60000) / 1000)).padStart(2, '0');
+  document.getElementById('countdown').textContent =
+    `próxima atualização em ${m}:${s}`;
+}, 1000);
+
+// ── Carregamento ───────────────────────────────────────────
+async function carregarDados() {
+  try {
+    const r = await fetch(DADOS_URL + '?t=' + Date.now());
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    dadosAtuais = await r.json();
+    renderizar(dadosAtuais);
+    proximaAtt = Date.now() + INTERVALO;
+  } catch (e) {
+    document.getElementById('conteudo').innerHTML =
+      `<div class="estado">⚠ Não foi possível carregar os dados.<br>
+       <small style="color:#5a6170">${e.message}</small></div>`;
+  }
+}
+
+// ── Render ─────────────────────────────────────────────────
+function renderizar(d) {
+  const pct       = Math.min(d.total_geral / d.meta_semanal, 1);
+  const atingida  = d.total_geral >= d.meta_semanal;
+  const faltam    = Math.max(d.meta_semanal - d.total_geral, 0);
+
+  document.getElementById('horario').textContent = d.atualizado_em.split(' ')[1] || d.atualizado_em;
+
+  document.getElementById('conteudo').innerHTML = `
+    <!-- META -->
+    <div class="meta-block fade-in">
+      <div>
+        <div class="meta-numeros">
+          <div class="meta-total ${atingida ? 'atingida' : ''}">${d.total_geral}</div>
+          <div class="meta-separador">/</div>
+          <div class="meta-valor">${d.meta_semanal}</div>
+        </div>
+        <div class="meta-label">torneios · meta semanal</div>
+      </div>
+      <div class="meta-barra-wrap">
+        <div class="meta-barra-labels">
+          <span>${(pct * 100).toFixed(0)}% da meta</span>
+          <span>${d.meta_semanal} torneios</span>
+        </div>
+        <div class="meta-barra-outer">
+          <div class="meta-barra-inner ${atingida ? 'atingida' : ''}"
+               style="width: ${(pct * 100).toFixed(1)}%"></div>
+        </div>
+        <div class="meta-faltam ${atingida ? 'atingida' : ''}">
+          ${atingida
+            ? '✓ Meta atingida!'
+            : `${faltam} torneio${faltam !== 1 ? 's' : ''} para a meta`}
+        </div>
+      </div>
+    </div>
+
+    <!-- AGENDAS -->
+    <div class="agendas fade-in">
+      ${blocoAgenda('sul',   'SUL',   d.sul,   d.total_sul)}
+      ${blocoAgenda('norte', 'NORTE', d.norte, d.total_norte)}
+    </div>
+  `;
+}
+
+function blocoAgenda(cls, titulo, abas, total) {
+  const meses = Object.entries(abas)
+    .map(([nome, qtd]) => `
+      <div class="mes-card">
+        <div class="mes-nome">${nomeCurto(nome)}</div>
+        <div class="mes-qtd ${qtd === 0 ? 'zero' : ''}">${qtd ?? '—'}</div>
+      </div>`)
+    .join('');
+
+  return `
+    <div class="agenda-card ${cls}">
+      <div class="agenda-header">
+        <div>
+          <div class="agenda-titulo">${titulo}</div>
+          <div class="agenda-total-label">total de torneios</div>
+        </div>
+        <div class="agenda-total">${total}</div>
+      </div>
+      <div class="meses-grid">${meses}</div>
+    </div>`;
+}
+
+function nomeCurto(nome) {
+  // "6. Junho" → "Junho" | "SUL_Mês1" → "Mês 1"
+  if (nome.includes('. ')) return nome.split('. ')[1];
+  return nome.replace(/_/g, ' ');
+}
+
+// ── Loop automático ────────────────────────────────────────
+carregarDados();
+setInterval(carregarDados, INTERVALO);
+</script>
+</body>
+</html>
