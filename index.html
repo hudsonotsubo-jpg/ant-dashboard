@@ -11,9 +11,7 @@
     --surface:   #111520;
     --border:    #1e2535;
     --sul:       #00b4ff;
-    --sul-dim:   #003d57;
     --norte:     #ff6b1a;
-    --norte-dim: #4a1f00;
     --ok:        #00e676;
     --warn:      #ffd600;
     --text:      #e8eaf0;
@@ -30,8 +28,8 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 28px 36px;
-    gap: 24px;
+    padding: 24px 36px;
+    gap: 20px;
   }
 
   /* ── HEADER ── */
@@ -40,225 +38,176 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 20px;
+    padding-bottom: 18px;
   }
 
-  .logo {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-  }
-
+  .logo { display: flex; align-items: baseline; gap: 12px; }
   .logo-ant {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
+    font-size: 2.6rem;
     letter-spacing: 4px;
-    color: var(--text);
     line-height: 1;
   }
-
   .logo-sub {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--muted);
   }
+  .header-right { text-align: right; }
+  .atualizado { font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .atualizado span { color: var(--ok); font-weight: 600; }
+  .countdown { font-size: 0.68rem; color: var(--muted); font-variant-numeric: tabular-nums; margin-top: 2px; }
 
-  .header-right {
-    text-align: right;
+  /* ── SELEÇÃO DE MESES ── */
+  .selecao-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 24px;
   }
-
-  .atualizado {
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 1px;
+  .selecao-titulo {
+    font-size: 0.68rem;
+    letter-spacing: 3px;
     text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
   }
-
-  .atualizado span {
-    color: var(--ok);
+  .selecao-titulo span {
+    color: var(--warn);
     font-weight: 600;
   }
+  .meses-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .mes-btn {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+    user-select: none;
+  }
+  .mes-btn:hover:not(.selecionado-1):not(.selecionado-2) {
+    border-color: var(--muted);
+    color: var(--text);
+  }
+  .mes-btn.selecionado-1 {
+    background: rgba(0,180,255,0.12);
+    border-color: var(--sul);
+    color: var(--sul);
+    font-weight: 600;
+  }
+  .mes-btn.selecionado-2 {
+    background: rgba(255,107,26,0.12);
+    border-color: var(--norte);
+    color: var(--norte);
+    font-weight: 600;
+  }
+  .mes-btn.selecionado-1::after {
+    content: ' MÊS 1';
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    opacity: 0.8;
+  }
+  .mes-btn.selecionado-2::after {
+    content: ' MÊS 2';
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    opacity: 0.8;
+  }
+  .mes-btn.sem-dados { opacity: 0.35; cursor: default; }
 
-  /* ── META PRINCIPAL ── */
+  .selecao-hint {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  /* ── META ── */
   .meta-block {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 28px 32px;
+    padding: 22px 28px;
     display: flex;
     align-items: center;
-    gap: 48px;
+    gap: 40px;
   }
-
-  .meta-numeros {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    white-space: nowrap;
-  }
-
+  .meta-numeros { display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
   .meta-total {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 6rem;
+    font-size: 5rem;
     line-height: 1;
-    color: var(--text);
     transition: color 0.5s;
   }
-
   .meta-total.atingida { color: var(--ok); }
-
-  .meta-separador {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: var(--muted);
-  }
-
-  .meta-valor {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: var(--muted);
-  }
-
-  .meta-label {
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-
-  .meta-barra-wrap {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .meta-barra-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 1px;
-  }
-
-  .meta-barra-outer {
-    height: 18px;
-    background: var(--border);
-    border-radius: 999px;
-    overflow: hidden;
-    position: relative;
-  }
-
+  .meta-separador { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--muted); }
+  .meta-valor { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--muted); }
+  .meta-label { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  .meta-barra-wrap { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .meta-barra-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); }
+  .meta-barra-outer { height: 16px; background: var(--border); border-radius: 999px; overflow: hidden; }
   .meta-barra-inner {
     height: 100%;
     border-radius: 999px;
     background: linear-gradient(90deg, var(--sul), var(--ok));
     transition: width 1s cubic-bezier(.4,0,.2,1);
-    position: relative;
   }
-
-  .meta-barra-inner.atingida {
-    background: linear-gradient(90deg, var(--ok), #69ffa7);
-  }
-
-  .meta-faltam {
-    font-size: 0.85rem;
-    color: var(--warn);
-    font-weight: 600;
-  }
-
-  .meta-faltam.atingida {
-    color: var(--ok);
-  }
+  .meta-barra-inner.atingida { background: linear-gradient(90deg, var(--ok), #69ffa7); }
+  .meta-faltam { font-size: 0.82rem; color: var(--warn); font-weight: 600; }
+  .meta-faltam.atingida { color: var(--ok); }
 
   /* ── AGENDAS ── */
-  .agendas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
+  .agendas { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   .agenda-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 24px 28px;
+    padding: 20px 24px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
-
-  .agenda-card.sul  { border-top: 3px solid var(--sul); }
+  .agenda-card.sul   { border-top: 3px solid var(--sul); }
   .agenda-card.norte { border-top: 3px solid var(--norte); }
-
-  .agenda-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .agenda-titulo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 4px;
-  }
-
-  .sul  .agenda-titulo { color: var(--sul); }
+  .agenda-header { display: flex; align-items: center; justify-content: space-between; }
+  .agenda-titulo { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 4px; }
+  .sul   .agenda-titulo { color: var(--sul); }
   .norte .agenda-titulo { color: var(--norte); }
-
-  .agenda-total {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.8rem;
-    line-height: 1;
-  }
-
-  .sul  .agenda-total { color: var(--sul); }
+  .agenda-total { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; line-height: 1; }
+  .sul   .agenda-total { color: var(--sul); }
   .norte .agenda-total { color: var(--norte); }
+  .agenda-total-label { font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
 
-  .agenda-total-label {
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* ── GRID DE MESES ── */
-  .meses-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 10px;
-  }
-
-  .mes-card {
+  /* ── MESES SELECIONADOS NAS AGENDAS ── */
+  .meses-selecionados { display: flex; gap: 12px; }
+  .mes-selecionado-card {
+    flex: 1;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 12px 14px;
+    padding: 10px 14px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
-
-  .mes-nome {
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .mes-qtd {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    line-height: 1;
-  }
-
-  .sul  .mes-qtd { color: var(--sul); }
-  .norte .mes-qtd { color: var(--norte); }
-
-  .mes-qtd.zero { color: var(--border); }
+  .ms-label { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .ms-nome  { font-size: 0.78rem; font-weight: 500; color: var(--text); }
+  .ms-qtd   { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; line-height: 1; }
+  .sul   .ms-qtd { color: var(--sul); }
+  .norte .ms-qtd { color: var(--norte); }
+  .ms-qtd.zero { color: var(--border); }
+  .nenhum-selecionado { font-size: 0.75rem; color: var(--muted); font-style: italic; }
 
   /* ── FOOTER ── */
   footer {
@@ -267,73 +216,29 @@
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid var(--border);
-    padding-top: 16px;
+    padding-top: 14px;
   }
-
-  .footer-info {
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 1px;
-  }
-
+  .footer-info { font-size: 0.68rem; color: var(--muted); letter-spacing: 1px; }
   .reload-btn {
     background: none;
     border: 1px solid var(--border);
     color: var(--muted);
-    padding: 6px 16px;
+    padding: 5px 14px;
     border-radius: 6px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 1px;
     cursor: pointer;
     transition: border-color 0.2s, color 0.2s;
   }
+  .reload-btn:hover { border-color: var(--sul); color: var(--sul); }
 
-  .reload-btn:hover {
-    border-color: var(--sul);
-    color: var(--sul);
-  }
-
-  /* ── LOADING / ERRO ── */
-  .estado {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    color: var(--muted);
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-  }
-
-  .spinner {
-    width: 36px;
-    height: 36px;
-    border: 3px solid var(--border);
-    border-top-color: var(--sul);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
+  /* ── LOADING ── */
+  .estado { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: var(--muted); font-size: 0.88rem; }
+  .spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--sul); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ── COUNTDOWN ── */
-  .countdown {
-    font-size: 0.7rem;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* ── ANIMAÇÃO ENTRADA ── */
-  .fade-in {
-    animation: fadeIn 0.6s ease both;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  .fade-in { animation: fadeIn 0.5s ease both; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
 </style>
 </head>
 <body>
@@ -344,12 +249,14 @@
     <div class="logo-sub">Agenda Nacional de Torneios</div>
   </div>
   <div class="header-right">
-    <div class="atualizado">Atualizado às <span id="horario">--:--</span></div>
+    <div class="atualizado">Dados de <span id="horario">--:--</span></div>
     <div class="countdown" id="countdown">próxima atualização em --:--</div>
   </div>
 </header>
 
-<div id="conteudo"><div class="estado"><div class="spinner"></div><span>Carregando dados...</span></div></div>
+<div id="conteudo">
+  <div class="estado"><div class="spinner"></div><span>Carregando dados...</span></div>
+</div>
 
 <footer>
   <div class="footer-info">DASHBOARD ANT · atualização automática a cada 10 min</div>
@@ -357,19 +264,39 @@
 </footer>
 
 <script>
-const DADOS_URL   = './dados.json';
-const INTERVALO   = 10 * 60 * 1000; // 10 minutos
-let   proximaAtt  = Date.now() + INTERVALO;
-let   dadosAtuais = null;
+const DADOS_URL  = './dados.json';
+const INTERVALO  = 10 * 60 * 1000;
+const META       = 40;
+const STORAGE_KEY = 'ant_meses_selecionados';
+
+let proximaAtt = Date.now() + INTERVALO;
+let dadosAtuais = null;
+
+// Persiste seleção no localStorage para sobreviver a reloads
+let mesesSelecionados = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 // ── Countdown ──────────────────────────────────────────────
 setInterval(() => {
-  const restante = Math.max(0, proximaAtt - Date.now());
-  const m = String(Math.floor(restante / 60000)).padStart(2, '0');
-  const s = String(Math.floor((restante % 60000) / 1000)).padStart(2, '0');
-  document.getElementById('countdown').textContent =
-    `próxima atualização em ${m}:${s}`;
+  const r = Math.max(0, proximaAtt - Date.now());
+  const m = String(Math.floor(r / 60000)).padStart(2,'0');
+  const s = String(Math.floor((r % 60000) / 1000)).padStart(2,'0');
+  document.getElementById('countdown').textContent = `próxima atualização em ${m}:${s}`;
 }, 1000);
+
+// ── Seleção de meses ───────────────────────────────────────
+function toggleMes(nome) {
+  if (mesesSelecionados.includes(nome)) {
+    mesesSelecionados = mesesSelecionados.filter(m => m !== nome);
+  } else if (mesesSelecionados.length < 2) {
+    mesesSelecionados.push(nome);
+  } else {
+    // Já tem 2: remove o mais antigo e adiciona o novo
+    mesesSelecionados.shift();
+    mesesSelecionados.push(nome);
+  }
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(mesesSelecionados));
+  renderizar(dadosAtuais);
+}
 
 // ── Carregamento ───────────────────────────────────────────
 async function carregarDados() {
@@ -379,7 +306,7 @@ async function carregarDados() {
     dadosAtuais = await r.json();
     renderizar(dadosAtuais);
     proximaAtt = Date.now() + INTERVALO;
-  } catch (e) {
+  } catch(e) {
     document.getElementById('conteudo').innerHTML =
       `<div class="estado">⚠ Não foi possível carregar os dados.<br>
        <small style="color:#5a6170">${e.message}</small></div>`;
@@ -387,75 +314,123 @@ async function carregarDados() {
 }
 
 // ── Render ─────────────────────────────────────────────────
-function renderizar(d) {
-  const pct       = Math.min(d.total_geral / d.meta_semanal, 1);
-  const atingida  = d.total_geral >= d.meta_semanal;
-  const faltam    = Math.max(d.meta_semanal - d.total_geral, 0);
+function nomeCurto(nome) {
+  // "6. Junho" → "Junho"
+  return nome.includes('. ') ? nome.split('. ')[1] : nome;
+}
 
-  document.getElementById('horario').textContent = d.atualizado_em.split(' ')[1] || d.atualizado_em;
+function renderizar(d) {
+  if (!d || !d.sul) return;
+
+  document.getElementById('horario').textContent =
+    (d.atualizado_em || '').split(' ')[1] || d.atualizado_em || '--';
+
+  // Todos os meses disponíveis (união de SUL e NORTE)
+  const todosMeses = [...new Set([...Object.keys(d.sul), ...Object.keys(d.norte)])];
+
+  // Calcula totais apenas dos meses selecionados
+  const totalSul   = mesesSelecionados.reduce((acc, m) => acc + (d.sul[m]   || 0), 0);
+  const totalNorte = mesesSelecionados.reduce((acc, m) => acc + (d.norte[m] || 0), 0);
+  const totalGeral = totalSul + totalNorte;
+  const pct        = Math.min(totalGeral / META, 1);
+  const atingida   = totalGeral >= META;
+  const faltam     = Math.max(META - totalGeral, 0);
+
+  // ── Seletor de meses ──
+  const btnsMeses = todosMeses.map(nome => {
+    const idx = mesesSelecionados.indexOf(nome);
+    const cls = idx === 0 ? 'selecionado-1' : idx === 1 ? 'selecionado-2' : '';
+    const vazio = (d.sul[nome] === 0 && d.norte[nome] === 0) ? 'sem-dados' : '';
+    return `<button class="mes-btn ${cls} ${vazio}"
+              onclick="toggleMes('${nome}')"
+              title="SUL: ${d.sul[nome] ?? '—'} | NORTE: ${d.norte[nome] ?? '—'}">
+              ${nomeCurto(nome)}
+            </button>`;
+  }).join('');
+
+  const hint = mesesSelecionados.length === 0
+    ? 'Clique em dois meses para calcular os totais.'
+    : mesesSelecionados.length === 1
+    ? `MÊS 1 selecionado: <strong>${nomeCurto(mesesSelecionados[0])}</strong>. Clique em mais um mês.`
+    : `MÊS 1: <strong>${nomeCurto(mesesSelecionados[0])}</strong> · MÊS 2: <strong>${nomeCurto(mesesSelecionados[1])}</strong>`;
+
+  // ── Cards de meses por agenda ──
+  function cardsMesesAgenda(agenda, cls) {
+    if (mesesSelecionados.length === 0) {
+      return `<div class="nenhum-selecionado">Selecione os meses acima</div>`;
+    }
+    return `<div class="meses-selecionados">` +
+      mesesSelecionados.map((m, i) => {
+        const qtd = agenda[m] ?? 0;
+        return `<div class="mes-selecionado-card">
+          <div class="ms-label">MÊS ${i+1}</div>
+          <div class="ms-nome">${nomeCurto(m)}</div>
+          <div class="ms-qtd ${qtd === 0 ? 'zero' : ''}">${qtd}</div>
+        </div>`;
+      }).join('') +
+    `</div>`;
+  }
 
   document.getElementById('conteudo').innerHTML = `
+    <!-- SELETOR DE MESES -->
+    <div class="selecao-wrap fade-in">
+      <div class="selecao-titulo">
+        Meses da agenda vigente
+        <span>— selecione 2</span>
+      </div>
+      <div class="meses-selector">${btnsMeses}</div>
+      <div class="selecao-hint">${hint}</div>
+    </div>
+
     <!-- META -->
     <div class="meta-block fade-in">
       <div>
         <div class="meta-numeros">
-          <div class="meta-total ${atingida ? 'atingida' : ''}">${d.total_geral}</div>
+          <div class="meta-total ${atingida ? 'atingida' : ''}">${totalGeral}</div>
           <div class="meta-separador">/</div>
-          <div class="meta-valor">${d.meta_semanal}</div>
+          <div class="meta-valor">${META}</div>
         </div>
         <div class="meta-label">torneios · meta semanal</div>
       </div>
       <div class="meta-barra-wrap">
         <div class="meta-barra-labels">
-          <span>${(pct * 100).toFixed(0)}% da meta</span>
-          <span>${d.meta_semanal} torneios</span>
+          <span>${(pct*100).toFixed(0)}% da meta</span>
+          <span>${META} torneios</span>
         </div>
         <div class="meta-barra-outer">
           <div class="meta-barra-inner ${atingida ? 'atingida' : ''}"
-               style="width: ${(pct * 100).toFixed(1)}%"></div>
+               style="width:${(pct*100).toFixed(1)}%"></div>
         </div>
         <div class="meta-faltam ${atingida ? 'atingida' : ''}">
-          ${atingida
-            ? '✓ Meta atingida!'
-            : `${faltam} torneio${faltam !== 1 ? 's' : ''} para a meta`}
+          ${atingida ? '✓ Meta atingida!' : `${faltam} torneio${faltam!==1?'s':''} para a meta`}
         </div>
       </div>
     </div>
 
     <!-- AGENDAS -->
     <div class="agendas fade-in">
-      ${blocoAgenda('sul',   'SUL',   d.sul,   d.total_sul)}
-      ${blocoAgenda('norte', 'NORTE', d.norte, d.total_norte)}
+      <div class="agenda-card sul">
+        <div class="agenda-header">
+          <div>
+            <div class="agenda-titulo">SUL</div>
+            <div class="agenda-total-label">total de torneios</div>
+          </div>
+          <div class="agenda-total">${totalSul}</div>
+        </div>
+        ${cardsMesesAgenda(d.sul, 'sul')}
+      </div>
+      <div class="agenda-card norte">
+        <div class="agenda-header">
+          <div>
+            <div class="agenda-titulo">NORTE</div>
+            <div class="agenda-total-label">total de torneios</div>
+          </div>
+          <div class="agenda-total">${totalNorte}</div>
+        </div>
+        ${cardsMesesAgenda(d.norte, 'norte')}
+      </div>
     </div>
   `;
-}
-
-function blocoAgenda(cls, titulo, abas, total) {
-  const meses = Object.entries(abas)
-    .map(([nome, qtd]) => `
-      <div class="mes-card">
-        <div class="mes-nome">${nomeCurto(nome)}</div>
-        <div class="mes-qtd ${qtd === 0 ? 'zero' : ''}">${qtd ?? '—'}</div>
-      </div>`)
-    .join('');
-
-  return `
-    <div class="agenda-card ${cls}">
-      <div class="agenda-header">
-        <div>
-          <div class="agenda-titulo">${titulo}</div>
-          <div class="agenda-total-label">total de torneios</div>
-        </div>
-        <div class="agenda-total">${total}</div>
-      </div>
-      <div class="meses-grid">${meses}</div>
-    </div>`;
-}
-
-function nomeCurto(nome) {
-  // "6. Junho" → "Junho" | "SUL_Mês1" → "Mês 1"
-  if (nome.includes('. ')) return nome.split('. ')[1];
-  return nome.replace(/_/g, ' ');
 }
 
 // ── Loop automático ────────────────────────────────────────
