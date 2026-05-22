@@ -1,1 +1,35 @@
-{}
+{
+  "atualizado_em": "22/05/2026 12:29",
+  "meta_semanal": 40,
+  "total_geral": 12,
+  "total_sul": 9,
+  "total_norte": 3,
+  "sul": {
+    "1. Janeiro": 0,
+    "2. Fevereiro": 0,
+    "3. Março": 0,
+    "4. Abril": 0,
+    "5. Maio": 0,
+    "6. Junho": 1,
+    "7. Julho": 1,
+    "8. Agosto": 6,
+    "9. Setembro": 0,
+    "10. Outubro": 1,
+    "11. Novembro": 0,
+    "12. Dezembro": 0
+  },
+  "norte": {
+    "1. Janeiro": 0,
+    "2. Fevereiro": 0,
+    "3. Março": 0,
+    "4. Abril": 0,
+    "5. Maio": 0,
+    "6. Junho": 2,
+    "7. Julho": 0,
+    "8. Agosto": 1,
+    "9. Setembro": 0,
+    "10. Outubro": 0,
+    "11. Novembro": 0,
+    "12. Dezembro": 0
+  }
+}
