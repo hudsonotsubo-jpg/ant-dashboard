@@ -1,8 +1,8 @@
 {
-  "atualizado_em": "16/06/2026 17:40",
+  "atualizado_em": "16/06/2026 17:49",
   "meta_semanal": 40,
-  "total_geral": 6,
-  "total_sul": 3,
+  "total_geral": 7,
+  "total_sul": 4,
   "total_norte": 3,
   "sul": {
     "1. Janeiro": 0,
@@ -12,7 +12,7 @@
     "5. Maio": 0,
     "6. Junho": 0,
     "7. Julho": 1,
-    "8. Agosto": 0,
+    "8. Agosto": 1,
     "9. Setembro": 1,
     "10. Outubro": 1,
     "11. Novembro": 0,
